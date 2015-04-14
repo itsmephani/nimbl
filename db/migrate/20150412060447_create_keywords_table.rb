@@ -4,6 +4,7 @@ class CreateKeywordsTable < ActiveRecord::Migration
       t.string :keyword
       t.decimal :results_count
       t.decimal :time_taken
+      t.timestamps
     end
   end
 end

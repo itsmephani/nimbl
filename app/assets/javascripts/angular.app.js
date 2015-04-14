@@ -1,1 +1,7 @@
-var app = angular.module('app', []);
+var app = angular.module('app', ['lr.upload']);
+
+app.config([
+  "$httpProvider", function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+  }
+]);

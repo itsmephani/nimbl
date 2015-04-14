@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require angular.min.js
 //= require bootstrap.min.js
+//= require angular-upload.min.js
 //= require angular.app.js
 //= require search.js

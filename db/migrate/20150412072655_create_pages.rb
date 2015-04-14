@@ -8,6 +8,7 @@ class CreatePages < ActiveRecord::Migration
       t.integer :start
       t.text    :content
       t.integer :keyword_id
+      t.timestamps
     end
   end
 end

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get '/', to: "search#index"
-  get 'search/', to: "search#search"
+  root to: "search#index"
+  scope '/api' do 
+    devise_for :users
+    get 'search/', to: "search#search"
+    post 'file_upload/', to: "search#file_upload"
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
