@@ -27,10 +27,9 @@ class Search
   end
 
   def get_page
-    @page =  @mechanize.get('http://www.google.com/search?gcx=w&sourceid=chrome&ie=UTF-8&start='+@start.to_s+'&q='+ keyword.gsub(" ", "+") )
-    rescue
-      sleep 3.seconds
-      get_page
+    @page =  @mechanize.get('http://www.google.com/search?gcx=w&sourceid=chrome&ie=UTF-8&start='+@start.to_s+'&q='+ keyword.gsub(" ", "+") )    
+    rescue Exception => e
+      puts e.message
   end
 
   def store_keyword
