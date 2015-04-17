@@ -17,4 +17,5 @@
 //= require bootstrap.min.js
 //= require angular-upload.min.js
 //= require angular.app.js
+//= require home.js
 //= require search.js

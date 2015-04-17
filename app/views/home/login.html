@@ -1,0 +1,17 @@
+<div class="form-box" id="login-box">
+	<div class="header">Login</div>
+	<form name="loginForm" ng-submit="login()">
+		<div class="body bg-gray">
+			<div class="form-group" ng-class="{'has-error': sError}">
+				<b class="text-danger">{{msgText}}</b><br/>
+				<label>Email</label>
+				<input type="text" class="form-control" ng-model="user.email" required></input><br/>
+				<label>Password</label>
+				<input type="password" class="form-control" ng-model="user.password" required></input><br/>
+			</div>
+		</div>
+		<div class="footer">                                                               
+			<button class="btn btn-success" ng-disabled="loginForm.$invalid"> Login </button> 
+		</div>
+	</form>
+</div>

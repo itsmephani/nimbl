@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: "search#index"
+  root to: "home#login"
+  get 'dashboard', to: "search#index"
   scope '/api' do 
     devise_for :users
     get 'search/', to: "search#search"

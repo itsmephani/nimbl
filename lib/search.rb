@@ -16,6 +16,7 @@ class Search
         @current_keyword = store_keyword if @start == 0
         @current_page = create_page
         result[:page_id] = @current_page.id
+        result[:keyword_id] = @current_keyword.id
         top_ads
         rhs_block
         search_results_google
