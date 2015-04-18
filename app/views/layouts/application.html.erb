@@ -8,7 +8,7 @@
 </head>
 <body ng-app="app">
   <%= render 'partials/header' %>
-  <div class="container-fluid" ng-controller="<%= params[:controller] %>Controller">
+  <div class="container" ng-controller="<%= params[:controller] %>Controller">
     <%= yield %>
   </div>
 </body>

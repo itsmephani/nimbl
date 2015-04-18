@@ -27,11 +27,13 @@ app.config(function($httpProvider) {
 
 app.run(function($http, $rootScope, $location){
   
-  $rootScope.email = localStorage.email;
+  if(localStorage.email && window.location.pathname == "/"){
+    $rootScope.email = localStorage.email;
+    window.location.href = 'dashboard';
+  }
 
   $rootScope.onLogin = function(data){
     $rootScope.email = data.email;
-    alert(JSON.stringify(data))
     localStorage.setItem('currentUser', true);
     localStorage.setItem('isAdmin', data.is_admin);
     localStorage.setItem('email', data.email);

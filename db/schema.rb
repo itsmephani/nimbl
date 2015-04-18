@@ -11,33 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417182042) do
+ActiveRecord::Schema.define(version: 20150418055057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "keywords", force: :cascade do |t|
-    t.string  "keyword"
-    t.decimal "results_count"
-    t.decimal "time_taken"
+    t.string   "keyword"
+    t.decimal  "results_count"
+    t.decimal  "time_taken"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pages", force: :cascade do |t|
-    t.integer "no_of_adwords_top"
-    t.integer "no_of_adwords_right"
-    t.integer "no_of_non_adwords_results"
-    t.integer "total_results_per_page"
-    t.integer "start"
-    t.text    "content"
-    t.integer "keyword_id"
+    t.integer  "no_of_adwords_top"
+    t.integer  "no_of_adwords_right"
+    t.integer  "no_of_non_adwords_results"
+    t.integer  "total_results_per_page"
+    t.integer  "start"
+    t.text     "content"
+    t.integer  "keyword_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "results", force: :cascade do |t|
-    t.string  "link"
-    t.string  "display_url"
-    t.boolean "is_ad",       default: false
-    t.integer "page_id"
-    t.integer "keyword_id"
+    t.string   "link"
+    t.string   "display_url"
+    t.boolean  "is_ad",       default: false
+    t.integer  "page_id"
+    t.integer  "keyword_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|

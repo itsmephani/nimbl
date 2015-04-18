@@ -1,12 +1,15 @@
 <div class="row">
-  <div class="col col-md-4">
-    <input type="text" ng-model="q" class="form-control" placeholder="search.."/>
+  <div class="col col-md-3">
+    <input type="text" ng-model="model.q" class="form-control" placeholder="search.."/>
   </div>
   <div class="col col-md-2">
-    <button ng-click="search()" class="btn btn-success">search</button>
+    <button ng-click="model.scope='having_keyword'; search();" class="btn btn-success">search results</button>
+  </div>
+  <div class="col col-md-2">
+    <button ng-click="model.scope='adword'; search();" class="btn btn-success">search urls</button>
   </div>
 
-  <div class="col col-md-6">
+  <div class="col col-md-4">
     <div  class="btn btn-info btn-upload" upload-button url="/api/file_upload" 
       on-success="onSuccess(response)" accept="{{acceptTypes}}" on-upload="searching=true" on-complete="onComplete(response)"> 
       Upload File
@@ -14,13 +17,42 @@
   </div>
 </div>
 <div class="row voffset2" ng-if="searching">
-  <h2> Searching .. </h2>
+  <h2 class="col-md-offset-1"> Searching .. </h2>
 </div>
 <div class="row voffset2">
   <div class="col col-md-8 col-md-offset-2">
     <div class="alert alert-dismissible alert-danger" ng-if="responseStatus &&responseStatus != 200">
       <button type="button" class="close" data-dismiss="alert">×</button>
       <strong>{{responseMessage}}</strong>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="row">
+    <h3>Keyword: {{model.q}}    , Results Count: {{data.keyword.results_count}} , Time Taken: {{data.keyword.time_taken}} , count: {{data.count}} </h3>
+    <h3>No. of Adwords: Top: {{data.no_of_adwords_top}}, Right: {{data.no_of_adwords_right}},   No. of non adword results: {{data.no_of_non_adwords_results}} </h3>
+  <div class="row voffset2">
+    <table class="table table-bordered" style="word-break: break-all">
+      <thead class="bg-info">
+        <tr>
+          <th>Diplay Url</th>
+          <th>link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="result in data.results" ng-class="{'text-success': result.is_ad}">
+          <td> {{result.display_url}}</a> </td>
+          <td> <a ng-href="{{result.link}}" ng-class="{'text-success': result.is_ad}" target="_blank">{{result.link}}</a> </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="col-md-7">
+      <ul class="pagination">
+        <li> <a ng-click="model.offset=0;" class ="btn btn-md" ng-disabled="model.offset==0">First</a></li>
+        <li> <a ng-click="model.offset=model.offset-1;" ng-disabled="model.offset == 0" class ="btn btn-sd">previous</a></li>
+        <li> <a ng-click="model.offset=model.offset+1;" ng-disabled="model.offset==ceil(data.count/model.limit)" class ="btn btn-sd">next</a></li>
+        <li> <a ng-click="model.offset=ceil(data.count/model.limit);" class ="btn btn-md" ng-disabled="model.offset==ceil(data.count/model.limit)">Last</a></li>
+      </ul>
     </div>
   </div>
 </div>

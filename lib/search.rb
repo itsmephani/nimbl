@@ -12,7 +12,7 @@ class Search
       @keyword = keyword
       loop do
         get_page        
-        break if Keyword.exists?({keyword: @keyword})
+        break if @start == 0 && Keyword.exists?({keyword: @keyword})
         @current_keyword = store_keyword if @start == 0
         @current_page = create_page
         result[:page_id] = @current_page.id
@@ -35,7 +35,7 @@ class Search
 
   def store_keyword
     results_count = page.search('#resultStats').text.split(" ")[1]
-    time_taken = page.search('#resultStats').text.split(" ")[3][1..-1].to_s + " seconds"
+    time_taken = page.search('#resultStats').text.split(" ")[3][1..-1] if page.search('#resultStats').text.length > 0
     Keyword.create({keyword: @keyword, results_count: results_count, time_taken: time_taken})
   end
 
@@ -76,7 +76,7 @@ class Search
   end
 
   def store_result
-    Result.create(result)
+    Result.create(result) unless result[:link].blank? || result[:display_url].blank?
   end
   
   def update_page 
