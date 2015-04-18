@@ -22,6 +22,8 @@ app.controller('searchController', ['$scope', '$http', function($scope, $http){
     $scope.responseMessage = response.data.message;
     $scope.responseStatus = response.status;
     $scope.searching = false;
+    $scope.data = data;    
+    $scope.model.q = data.keyword.keyword;
   }
 
   $scope.$watch('model.offset', function(){

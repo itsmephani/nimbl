@@ -1,7 +1,7 @@
 class ResultsController < ApplicationController
 
   def index
-    Search.new [params[:q]] if params[:offset].to_i == 0
+    SearchJob.perform_later [params[:q]] if params[:offset].to_i == 0
     results = params[:scope].present? ? Result.send(params[:scope], params) : Result.all
     count = results.count
     results = results.paginate(params)
